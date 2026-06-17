@@ -1,6 +1,6 @@
 # 👋 Hi there, Good Day!
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Mobile+developer;Looking+for+Internship,+Paying+500+000+VND/month)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=435&lines=Mobile+developer;Looking+for+Internship,+Paying+500,000+VND/month)](https://git.io/typing-svg)
 
 
 ## 📱 Mobile Developer
