@@ -12,8 +12,8 @@
 
 ### 🔥 My Stats:
 
-<img src="https://github.com/NguynNe3110/NguynNe3110/blob/output/snake.svg" alt="Snake animation" />
-[![GitHub Streak](https://streak-stats.demolab.com?user=NguynNe3110&theme=dark)](https://git.io/streak-stats)
+<div align="center">
+[![GitHub Streak](https://streak-stats.demolab.com?user=NguynNe3110&theme=gotham)](https://git.io/streak-stats)
 </div>
 
 ### 📈 Contribution Graph
