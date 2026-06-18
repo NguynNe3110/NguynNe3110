@@ -12,7 +12,7 @@
 
 ### 🔥 My Stats:
 
-<a href="https://git.io/streak-stats"><img src="https://streak-stats.demolab.com?user=NguynNe3110&theme=dark" alt="GitHub Streak" /></a>
+[![GitHub Streak](https://streak-stats.demolab.com/?user=NguynNe3110&theme=gotham)](https://git.io/streak-stats)
 
 ### 📈 Contribution Graph
 [![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=NguynNe3110&theme=github-compact)](https://github.com/ashutosh00710/github-readme-activity-graph)
