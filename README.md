@@ -13,7 +13,7 @@
 ### 🔥 My Stats:
 
 <div align="center">
-[![GitHub Streak](https://streak-stats.demolab.com?user=NguynNe3110&theme=gotham)](https://git.io/streak-stats)
+  <img src="https://streak-stats.demolab.com?user=NguynNe3110&theme=dark&hide_border=false&border_radius=5" height="220" alt="GitHub Streak" />
 </div>
 
 ### 📈 Contribution Graph
