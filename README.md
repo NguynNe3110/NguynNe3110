@@ -1,4 +1,4 @@
-# 👋 Hi there, Good Day!
+# 👋 Hi there, I'm Nguyên Trần!
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&width=735&lines=Mobile+developer;Looking+for+Internship,+Paying+500,000+VND/month)](https://git.io/typing-svg)
 
