@@ -6,7 +6,7 @@
 ## 📱 Mobile Developer
 
 ### Về tôi
-- 🔭 Tôi là một lập trình viên đam mê công nghệ
+- 🔭 Tôi không phải là một lập trình viên đam mê công nghệ
 - 🌱 Hiện tại đang học hỏi và phát triển bản thân
 - 💻 Stack: Kotlin, MVVM, Mobile App Development
 
