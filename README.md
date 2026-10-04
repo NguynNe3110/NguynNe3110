@@ -10,6 +10,10 @@
 - 🌱 Hiện tại đang học hỏi và phát triển bản thân
 - 💻 Stack: Native(Kotlin - MVVM), Flutter, Mobile App Development
 
+## 🛠️ Tech Stack
+
+[![My Skills](https://skillicons.dev/icons?i=kotlin,java,androidstudio,flutter,dart,gradle,postgres,mysql,firebase,supabase,docker,git,github,githubactions,postman,idea,vscode)](https://skillicons.dev)
+
 ### 🔥 My Stats:
 
 <div align="center">
