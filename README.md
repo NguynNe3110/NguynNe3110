@@ -21,7 +21,11 @@
 </div>
 
 ### 📈 Contribution Graph
-[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=NguynNe3110&theme=github-compact)](https://github.com/ashutosh00710/github-readme-activity-graph)
+[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=NguynNe3110&theme=dracula)](https://github.com/ashutosh00710/github-readme-activity-graph)
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=NguynNe3110&layout=compact&langs_count=10&theme=github_dark" alt="Top Languages" />
+</div>
 
 <br clear="both">
 
