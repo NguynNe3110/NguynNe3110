@@ -12,7 +12,7 @@
 
 ## 🛠️ Tech Stack
 
-[![My Skills](https://skillicons.dev/icons?i=kotlin,flutter,dart,java,postgres,mysql,firebase,supabase,docker,git,github,githubactions,postman,vscode,androidstudio)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=kotlin,flutter,dart,react,java,postgres,mysql,firebase,supabase,docker,git,github,githubactions,postman,vscode)](https://skillicons.dev)
 
 ### 🔥 My Stats:
 
