@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#090d19" />
+  <meta name="description" content="Nguyên Trần — Mobile Developer. Khám phá portfolio Kotlin, Flutter và React Native dưới dạng một chiếc điện thoại tương tác." />
+  <meta property="og:title" content="Nguyên Trần — Mobile Developer" />
+  <meta property="og:description" content="A portfolio you can explore, one tap at a time." />
+  <meta property="og:type" content="website" />
+  <title>Nguyên Trần · Mobile Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d19;
+      --line: rgba(205, 211, 255, .11);
+      --ink: #f8f7ff;
+      --muted: #a3a9c2;
+      --violet: #a993ff;
+      --mint: #a9f3d4;
+      --phone: #11172a;
+      --surface: #1d2337;
+      --surface-line: rgba(235,238,255,.095);
+      --glass: rgba(255,255,255,.075);
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    button, input, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #b7acff; outline-offset: 4px; }
+    a { color: inherit; text-decoration: none; }
+    .icon { width: 20px; height: 20px; display: block; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .page { position: relative; isolation: isolate; min-height: 100svh; overflow: hidden; }
+    .page::before { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .38; background-image: linear-gradient(rgba(155,174,238,.065) 1px,transparent 1px),linear-gradient(90deg,rgba(155,174,238,.065) 1px,transparent 1px); background-size: 78px 78px; mask-image: linear-gradient(to right,transparent 0%,#000 43%,#000 100%); pointer-events: none; }
+    .ambient { position: absolute; z-index: -1; border-radius: 50%; filter: blur(105px); pointer-events: none; }
+    .ambient.a { width: 610px; height: 610px; right: 1%; top: 7%; background: rgba(101,78,206,.17); }
+    .ambient.b { width: 450px; height: 450px; left: -14%; bottom: -28%; background: rgba(43,129,133,.10); }
+    .site-header { max-width: 1300px; padding: 27px 54px 0; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .identity { display: flex; align-items: center; gap: 12px; font: 800 13px "Manrope", sans-serif; letter-spacing: .095em; white-space: nowrap; }
+    .logo-mark { display:grid; place-items: center; width: 37px; height: 37px; border: 1px solid rgba(175,166,255,.45); background: linear-gradient(145deg,rgba(171,146,255,.26),rgba(69,84,157,.08)); border-radius: 13px; color: #d9ceff; font-size: 15px; letter-spacing: -.06em; }
+    .logo-mark span { transform: translateY(-1px); }
+    .header-right { display:flex; align-items:center; gap: 22px; font-size: 12px; font-weight: 700; }
+    .edition { color: #898eae; letter-spacing: .11em; text-transform: uppercase; }
+    .header-link { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid rgba(211,210,255,.2); border-radius: 999px; color: #e2e2f7; transition: .2s; }
+    .header-link .icon { width: 15px; height: 15px; }
+    .header-link:hover { background: rgba(255,255,255,.09); transform: translateY(-2px); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(430px, 1fr); align-items: center; min-height: calc(100svh - 130px); max-width: 1300px; margin: 0 auto; padding: 40px 54px 35px; gap: 36px; }
+    .copy-area { padding-bottom: 32px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(156,244,207,.20); color: #c7f8e6; padding: 10px 15px; border-radius: 999px; background: rgba(119,227,188,.065); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .live-dot { display:inline-block; width: 7px; height: 7px; background: #9bebbb; border-radius:50%; box-shadow:0 0 0 4px rgba(155,235,187,.12),0 0 16px #8eecc1; }
+    .headline { font: 800 clamp(51px,5vw,79px)/1.095 "Manrope",sans-serif; letter-spacing: -.074em; margin: 29px 0 24px; }
+    .headline .gradient { display: block; background: linear-gradient(110deg,#e5d8ff 2%,#ad9cfc 38%,#7fd4d0 95%); -webkit-background-clip: text; background-clip:text; color:transparent; }
+    .intro { max-width: 475px; font-size: 16px; line-height: 1.9; color: #b4b7d0; margin: 0; }
+    .intro strong { color: #f9f5ff; font-weight: 700; }
+    .tags { display:flex; flex-wrap:wrap; gap: 9px; margin-top: 25px; }
+    .tag { border: 1px solid rgba(197,201,245,.16); padding: 9px 13px; color: #c5c4dd; border-radius: 999px; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.025); }
+    .actions { display:flex; flex-wrap:wrap; gap: 12px; align-items:center; margin-top: 35px; }
+    .primary-btn, .text-btn { display:inline-flex; align-items:center; justify-content:center; gap: 12px; border-radius: 16px; height: 51px; font-size: 13px; font-weight: 800; transition: transform .2s,background .2s,box-shadow .2s; }
+    .primary-btn { border: 0; color: #17142b; padding: 0 21px; background: #bdb0ff; box-shadow: 0 12px 45px rgba(149,115,255,.23); }
+    .primary-btn:hover { transform: translateY(-3px); background:#d3cbff; box-shadow: 0 17px 55px rgba(149,115,255,.30); }
+    .text-btn { padding: 0 15px; color: #d8d8ea; background: transparent; border: 1px solid rgba(226,220,255,.18); }
+    .text-btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.07); }
+    .primary-btn .icon,.text-btn .icon { width: 17px; height: 17px; }
+    .footnote { display:flex; align-items:center; gap: 13px; margin-top: 66px; color: #747b9b; font-size: 10px; text-transform:uppercase; letter-spacing:.15em; font-weight:800; }
+    .footnote .rule { width: 31px; height: 1px; background: #747b9b; }
+    .phone-stage { position:relative; min-height: 764px; display:flex; align-items:center; justify-content:center; }
+    .halo { position:absolute; left:50%; top:50%; width: 590px; height:590px; transform:translate(-50%,-50%); border:1px solid rgba(184,165,255,.09); border-radius:50%; pointer-events:none; }
+    .halo::before,.halo::after { content:""; position:absolute; border: 1px solid rgba(184,165,255,.08); border-radius:50%; inset:50px; }
+    .halo::after { inset:120px; border-style:dashed; border-color:rgba(184,165,255,.095); }
+    .float-tag { position:absolute; z-index:4; display:flex; align-items:center; gap:10px; padding:12px 15px; border:1px solid rgba(221,209,255,.19); background:rgba(25,27,53,.85); backdrop-filter:blur(20px); border-radius:14px; font-size:11px; color:#d0cbed; box-shadow:0 15px 40px #0609135c; }
+    .float-tag .icon { width:15px;height:15px;color:#ad9cff; }
+    .float-tag.one { right:-6px; top: 124px; transform: rotate(5deg); }
+    .float-tag.two { left:-2px; bottom: 130px; transform: rotate(-5deg); }
+    .device { position:relative; z-index:2; height: 722px; width: 357px; border: 7px solid #303342; border-top-color:#404354; border-left-color:#43465a; border-right-color:#1b2030; border-bottom-color:#202536; border-radius: 52px; padding: 4px; background: #060812; box-shadow: 0 2px 0 1px #66677e inset,0 0 0 1px #0c1020,20px 40px 90px rgba(0,0,0,.54),0 0 100px rgba(132,105,255,.11); transform: rotate(-1.9deg); transition: transform .4s ease; }
+    .device:hover,.device.activated { transform: rotate(0deg) translateY(-5px); }
+    .device::before { content:""; position:absolute; width:3px; height:66px; background: linear-gradient(#5e6075,#2b2e42); border-radius:5px 0 0 5px; left:-10px; top:153px; }
+    .device::after { content:""; position:absolute; width:3px; height:80px; background:linear-gradient(#595b6b,#262a41); border-radius:0 5px 5px 0; right:-10px; top:178px; }
+    .screen { position:relative; width:100%; height:100%; overflow:hidden; border-radius:40px; background: var(--phone); isolation:isolate; }
+    .screen::after { content:""; position:absolute; inset:0; border:1px solid rgba(255,255,255,.065); border-radius:inherit; pointer-events:none; z-index:10; }
+    .status { position:absolute; z-index:8; top:0; left:0; right:0; height:50px; display:flex; align-items:center; justify-content:space-between; padding:8px 27px 0; color: #f9faff; font-size:12px; font-weight:800; pointer-events:none; }
+    .status-center { position:absolute; width:11px; height:11px; background:#05060a; border: 2px solid #242738; border-radius:50%; top:17px; left:calc(50% - 5px); }
+    .status-right { display:flex; align-items:center; gap:5px; }
+    .status-right .icon { width:14px; height:14px; stroke-width:2.5; }
+    .status-right .battery { width:19px; height:12px; }
+    .views { position:absolute; inset:0; }
+    .view { position:absolute; inset:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; padding: 61px 21px 82px; display:none; background:#131829; animation: slide-in .28s cubic-bezier(.22,.9,.24,1); }
+    .view::-webkit-scrollbar { display:none; }
+    .view.active { display:block; }
+    @keyframes slide-in { from { opacity:0; transform:translateX(13px); } to { opacity:1; transform:translateX(0); } }
+    .home-view { background:radial-gradient(ellipse at 82% 18%,rgba(119,89,199,.6),transparent 45%),radial-gradient(ellipse at 0 58%,rgba(74,126,148,.22),transparent 57%),linear-gradient(155deg,#29213c,#1a2037 52%,#131b2c); padding:65px 21px 96px; }
+    .home-view::before { content:""; display:block; position:absolute; height:325px; width:325px; border:1px solid rgba(255,255,255,.06); border-radius:50%; top: -113px; right:-171px; box-shadow:0 0 0 44px rgba(255,255,255,.018),0 0 0 90px rgba(255,255,255,.018); pointer-events:none; }
+    .home-head { position:relative; display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px; }
+    .home-label-date { font-size:11px; font-weight:700; color:#dfd5f0; }
+    .home-hello { margin:7px 0 0; font:800 24px/1.3 "Manrope",sans-serif; letter-spacing:-.065em; }
+    .avatar-mini { display:grid; place-items:center; height:39px; width:39px; border-radius:14px; background:linear-gradient(140deg,#e7caff,#9b91e6 55%,#5d688e); color:#1f1b3a; font:800 14px "Manrope",sans-serif; border:2px solid rgba(255,255,255,.32); }
+    .feature-card { position:relative; overflow:hidden; width:100%; background:linear-gradient(135deg,rgba(255,255,255,.20),rgba(255,255,255,.06) 68%); border:1px solid rgba(255,255,255,.22); border-radius:24px; padding:22px 19px 17px; text-align:left; backdrop-filter:blur(15px); box-shadow:0 12px 36px rgba(14,14,39,.18); color:#fff; transition:transform .2s,background .2s; }
+    .feature-card:hover { transform:translateY(-3px); background:linear-gradient(135deg,rgba(255,255,255,.27),rgba(255,255,255,.08) 68%); }
+    .feature-card::after { content:"✦"; position:absolute; font-size:92px; line-height:1; font-weight:400; color:rgba(227,221,255,.12); right:-5px; bottom:-12px; transform:rotate(-14deg); }
+    .feature-title { display:block; font-size:10px; color:#dbd6f8; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+    .feature-heading { display:block; font:800 21px/1.28 "Manrope",sans-serif; letter-spacing:-.06em; margin:12px 0 7px; max-width:215px; }
+    .feature-sub { font-size:11px; color:#d3d3e9; display:block; line-height:1.65; max-width:215px; }
+    .feature-bottom { display:flex; align-items:center; gap:7px; margin-top:18px; color:#fff; font-weight:800; font-size:11px; }
+    .feature-bottom .icon { width:13px; height:13px; }
+    .home-section-title { display:flex; justify-content:space-between; margin:25px 1px 14px; align-items:center; }
+    .home-section-title strong { font-size:12px; font-weight:800; letter-spacing:-.02em; }
+    .home-section-title span { color:#bebed5; font-size:10px; }
+    .apps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px 10px; }
+    .app-tile { border:0; padding:0; background:transparent; color:#f2f2ff; display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; font-size:11px; font-weight:700; }
+    .app-symbol { width:60px; height:60px; border-radius:19px; display:grid; place-items:center; position:relative; overflow:hidden; box-shadow:inset 0 1px rgba(255,255,255,.35),0 8px 18px rgba(12,10,31,.27); transition:transform .23s cubic-bezier(.2,.95,.3,1.3); }
+    .app-symbol::after { content:""; position:absolute; background:rgba(255,255,255,.22); height:65px;width:65px;border-radius:40%;right:-40px;top:-39px; }
+    .app-symbol .icon { width:29px;height:29px; stroke-width:1.8; z-index:1; }
+    .app-tile:hover .app-symbol, .app-tile:focus-visible .app-symbol { transform:scale(1.1) translateY(-3px); }
+    .app-purple { background:linear-gradient(145deg,#c6b0ff,#8067d6); color:#20153f; }
+    .app-blue { background:linear-gradient(145deg,#99dcff,#5889df); color:#112947; }
+    .app-pink { background:linear-gradient(145deg,#f6b9cb,#df799f); color:#522139; }
+    .app-orange { background:linear-gradient(145deg,#ffda9d,#efaa61); color:#57341e; }
+    .app-dark { background:linear-gradient(145deg,#444b6a,#1d223a); color:#fff; }
+    .app-green { background:linear-gradient(145deg,#b5f6d7,#60bca5); color:#153c39; }
+    .mini-hint { text-align:center; margin:23px 0 0; font-size:10px; color:#b4b7d0; }
+    .dock { position:absolute; left:14px;right:14px; bottom:24px; height:68px; padding:9px 17px; border:1px solid rgba(255,255,255,.15); border-radius:24px; background:rgba(234,235,255,.12); backdrop-filter:blur(20px); display:flex; align-items:center; justify-content:space-around; box-shadow:0 10px 30px rgba(0,0,0,.16); }
+    .dock button { display:grid;place-items:center; border:0;border-radius:14px;width:47px;height:47px;background:rgba(255,255,255,.13);color:#fff;transition:.2s; }
+    .dock button:nth-child(2) { background:rgba(190,172,255,.38); }
+    .dock button:hover { transform:translateY(-4px); background:rgba(255,255,255,.26); }
+    .dock .icon { width:22px;height:22px; }
+    .system-navigation { position:absolute; z-index:8; bottom:0;left:0;right:0; height:42px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:12px; pointer-events:none; }
+    .system-navigation button { pointer-events:auto; border:0; padding:0; background:transparent; color:rgba(255,255,255,.65); }
+    .home-gesture { width:113px;height:5px; background:rgba(255,255,255,.81)!important; border-radius:9px; transition:width .2s,background .2s; }
+    .home-gesture:hover { width:128px;background:#fff!important; }
+    .sys-back { position:absolute; left:30px; bottom:6px; width:29px; height:28px; display:grid;place-items:center; opacity:.75; }
+    .sys-back[disabled] { visibility:hidden; }
+    .sys-back .icon { width:19px;height:19px; }
+    .app-header { display:flex; gap:11px; align-items:center; margin-bottom:25px; }
+    .back-circle { border:1px solid var(--surface-line); height:36px; width:36px; background:rgba(255,255,255,.06); display:grid;place-items:center; border-radius:12px; color:#eae8fa; }
+    .back-circle:hover { background:rgba(255,255,255,.14); }
+    .back-circle .icon { width:18px;height:18px; }
+    .app-header-title { font-weight:800; font-size:12px; color:#c4c7dc; }
+    .app-header-right { margin-left:auto; font-size:10px; color:#8e94ad; letter-spacing:.08em; text-transform:uppercase; }
+    .screen-eyebrow { color:#a89dfa; font-size:10px;letter-spacing:.17em;text-transform:uppercase;font-weight:800;margin:0 0 9px; }
+    .screen-h1 { font:800 29px/1.23 "Manrope",sans-serif; letter-spacing:-.065em; margin:0 0 10px; }
+    .screen-lead { color:#aab0c9; font-size:12px; line-height:1.8; margin:0 0 22px; }
+    .profile-box { display:flex; align-items:center; gap:14px; padding:17px; border-radius:19px; border:1px solid rgba(190,177,255,.18); background:linear-gradient(135deg,rgba(142,115,227,.19),rgba(119,204,190,.06)); margin:25px 0 22px; }
+    .profile-avatar { height:64px;width:64px;display:grid;place-items:center;flex-shrink:0;border-radius:20px;background:linear-gradient(145deg,#d7caff,#9288ec,#6286a2);color:#241b4e;font:800 24px "Manrope",sans-serif;box-shadow:0 8px 25px rgba(120,89,210,.2); }
+    .profile-box h2 {font:800 17px "Manrope",sans-serif;margin:0 0 5px;letter-spacing:-.04em;}
+    .profile-box p {font-size:11px;color:#c2bfd8;margin:0 0 9px;}
+    .available { display:inline-flex;align-items:center;gap:7px;font-size:9px;color:#b7eccf;font-weight:800; }
+    .available .live-dot { width:5px;height:5px; }
+    .copy-text { font-size:12px; line-height:1.95; color:#c3c7da; margin:0 0 15px; }
+    .subhead {font:800 15px "Manrope",sans-serif;letter-spacing:-.035em;margin:27px 0 14px;}
+    .info-rows { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+    .info-cell { padding:14px; border:1px solid var(--surface-line);border-radius:15px;background:rgba(255,255,255,.035); }
+    .info-cell small {display:block;color:#8b91aa;font-size:10px;margin-bottom:7px;}
+    .info-cell strong {display:block;color:#eeeafa;font-size:11px;line-height:1.45;}
+    .skill-group { border:1px solid var(--surface-line); background:rgba(255,255,255,.035);border-radius:19px;padding:16px;margin:13px 0; }
+    .skill-group-head { display:flex;gap:10px;align-items:center;margin-bottom:15px; }
+    .skill-group-head span { height:34px;width:34px;border-radius:10px;display:grid;place-items:center;background:rgba(170,151,255,.15);color:#b9a8ff; }
+    .skill-group-head .icon { width:18px;height:18px; }
+    .skill-group-head strong {font:800 13px "Manrope",sans-serif;}
+    .skill-chips {display:flex;flex-wrap:wrap;gap:7px;}
+    .skill-chip {padding:8px 10px;background:#252b40;border:1px solid rgba(255,255,255,.07);border-radius:9px;color:#d5d7e9;font-size:10px;font-weight:700;}
+    .project-card { overflow:hidden;border-radius:19px;border:1px solid var(--surface-line);background:#20253a;margin-bottom:14px; }
+    .project-art { position:relative;height:121px;display:flex;align-items:center;justify-content:center;overflow:hidden; }
+    .project-art.p1 { background:radial-gradient(circle at 25% 30%,#f4b6bb86,transparent 45%),linear-gradient(125deg,#553d69,#8b6a85); }
+    .project-art.p2 { background:radial-gradient(circle at 80% 30%,#ffe2a9a1,transparent 42%),linear-gradient(125deg,#43697b,#91bdac); }
+    .project-art.p3 { background:radial-gradient(circle at 15% 60%,#bad1ff96,transparent 50%),linear-gradient(125deg,#353e83,#485b86); }
+    .project-art .icon {width:56px;height:56px;color:#fff;stroke-width:1.25;filter:drop-shadow(0 8px 10px rgba(14,14,50,.22));}
+    .art-bubble {position:absolute;height:150px;width:150px;right:-55px;bottom:-100px;border:1px solid rgba(255,255,255,.3);border-radius:50%;box-shadow:0 0 0 25px rgba(255,255,255,.04),0 0 0 60px rgba(255,255,255,.035);}
+    .project-details {padding:15px;}
+    .project-meta {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
+    .project-index {color:#aaa6ef;font-size:10px;font-weight:800;letter-spacing:.08em;}
+    .project-state {font-size:9px;padding:5px 9px;border-radius:99px;border:1px solid rgba(255,255,255,.13);color:#c5c9dd;}
+    .project-details h3 {font:800 15px "Manrope",sans-serif;letter-spacing:-.03em;margin:0 0 8px;}
+    .project-details p {font-size:11px;line-height:1.75;color:#b5bbd0;margin:0 0 12px;}
+    .project-tech {display:flex;gap:6px;flex-wrap:wrap;}
+    .project-tech span {font-size:9px;padding:6px 8px;background:#30364e;border-radius:7px;color:#e4dff7;}
+    .external-block {display:flex;align-items:center;justify-content:space-between;gap:8px;padding:15px 16px;border:1px solid rgba(186,171,255,.24);background:rgba(166,146,255,.12);border-radius:15px;color:#e7dfff;font-size:11px;font-weight:800;transition:background .2s;}
+    .external-block:hover {background:rgba(166,146,255,.2);}
+    .external-block .icon {width:16px;height:16px;}
+    .timeline { position:relative; margin:24px 0 0 9px; padding-left:25px;border-left:1px solid #41445e; }
+    .timeline-item {position:relative;padding:0 0 28px;}
+    .timeline-item::before {content:"";position:absolute;left:-31px;top:4px;height:11px;width:11px;background:#ad9aff;border:3px solid #23293b;border-radius:50%;box-sizing:content-box;}
+    .timeline-item:last-child::before {background:#9aebd4;}
+    .timeline-item .phase {font-size:10px;font-weight:800;color:#a99df5;letter-spacing:.1em;text-transform:uppercase;}
+    .timeline-item h3 {font:800 15px "Manrope",sans-serif;letter-spacing:-.04em;margin:8px 0;}
+    .timeline-item p {font-size:11px;color:#bac0d4;line-height:1.8;margin:0;}
+    .github-hero { display:flex;align-items:center;gap:14px;background:linear-gradient(140deg,#25253f,#192a3a);border:1px solid var(--surface-line);padding:16px;border-radius:19px;margin:23px 0; }
+    .gh-avatar {width:57px;height:57px;display:grid;place-items:center;border-radius:17px;border:1px solid rgba(255,255,255,.18);background:#363852;color:#ece7ff;overflow:hidden;flex-shrink:0;}
+    .gh-avatar img {width:100%;height:100%;object-fit:cover;}
+    .gh-avatar .icon {width:29px;height:29px;}
+    .github-hero h3 {font-size:14px;margin:0 0 4px;}
+    .github-hero p {font-size:10px;margin:0;color:#a9b0cb;}
+    .gh-stats {display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:13px 0 21px;}
+    .gh-stat {border:1px solid var(--surface-line);border-radius:14px;padding:12px 7px;background:rgba(255,255,255,.045);text-align:center;}
+    .gh-stat strong {font:800 18px "Manrope",sans-serif;display:block;color:#fff;}
+    .gh-stat span {font-size:9px;color:#a6adc8;}
+    .repo-item {width:100%;display:block;border:1px solid var(--surface-line);border-radius:13px;padding:13px;margin:9px 0;background:rgba(255,255,255,.035);transition:background .2s;}
+    .repo-item:hover {background:rgba(255,255,255,.09);}
+    .repo-item strong {font-size:11px;color:#ded8ff;display:block;overflow-wrap:anywhere;}
+    .repo-item p {color:#aeb5c9;font-size:10px;line-height:1.55;margin:6px 0;}
+    .repo-meta {display:flex;align-items:center;justify-content:space-between;color:#8991a9;font-size:9px;}
+    .empty-state {background:rgba(255,255,255,.045);border:1px dashed rgba(255,255,255,.16);border-radius:13px;padding:17px;color:#abb2ca;font-size:11px;line-height:1.65;}
+    .contact-banner {height:144px;border-radius:20px;background:radial-gradient(circle at 73% 35%,#af9ef2,transparent 50%),linear-gradient(115deg,#465075,#273552);display:grid;place-items:center;margin:21px 0;position:relative;overflow:hidden;}
+    .contact-banner::after {content:"";border:1px solid rgba(255,255,255,.27);width:155px;height:155px;border-radius:50%;position:absolute;right:-51px;top:-50px;box-shadow:0 0 0 27px rgba(255,255,255,.04),0 0 0 57px rgba(255,255,255,.035);}
+    .contact-banner .icon {width:58px;height:58px;stroke-width:1.1;color:#fff;transform:rotate(-12deg);filter:drop-shadow(0 6px 8px #27314d60);}
+    .contact-links {display:grid;gap:10px;}
+    .contact-link {display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--surface-line);border-radius:15px;background:rgba(255,255,255,.04);color:#eff0fa;text-align:left;width:100%;transition:background .2s;}
+    .contact-link:hover {background:rgba(255,255,255,.10);}
+    .contact-icon {height:38px;width:38px;border-radius:12px;display:grid;place-items:center;background:rgba(160,142,253,.14);color:#b9adff;}
+    .contact-icon .icon {width:19px;height:19px;}
+    .contact-link .contact-name {display:block;font-size:11px;font-weight:800;margin-bottom:4px;}
+    .contact-link .contact-sub {display:block;font-size:10px;color:#9fa7c1;}
+    .contact-link .trailing {margin-left:auto;width:16px;height:16px;color:#acb1c5;}
+    .contact-note {color:#8993af;font-size:10px;line-height:1.7;margin:17px 2px;}
+    .toast {position:absolute;z-index:15;bottom:75px;left:50%;transform:translate(-50%,12px);width:max-content;max-width:calc(100% - 34px);border-radius:12px;color:#161827;background:#d6ccff;padding:11px 14px;font-size:10px;font-weight:800;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 10px 35px #0005;text-align:center;}
+    .toast.show {opacity:1;transform:translate(-50%,0);}
+    .mobile-caption { display:none; }
+    @media (min-width:1300px) { .phone-stage {padding-left:24px;} }
+    @media (max-width:1050px) { .site-header{padding:23px 28px 0;} .hero{padding:35px 28px;grid-template-columns:minmax(0,1fr) 385px;gap:7px;} .headline{font-size:clamp(46px,5.4vw,67px);} .float-tag.one{right:-4px;} .float-tag.two{left:-5px;} .device {transform:scale(.95) rotate(-1.9deg);} .device:hover,.device.activated{transform:scale(.95) rotate(0);} }
+    @media (max-width:760px) { .page{min-height:100svh;} .page::before{opacity:.12;} .ambient.a{right:-240px;} .site-header {padding:17px 21px 0;} .header-right .edition{display:none;} .header-link{padding:9px 12px;} .hero{display:flex;flex-direction:column;align-items:center;gap:0;padding:29px 13px 45px;min-height:0;} .copy-area {width:100%;max-width:390px;padding:0 7px 20px;text-align:center;} .eyebrow{font-size:9px;padding:8px 13px;} .headline{font-size:clamp(36px,9.6vw,49px);letter-spacing:-.07em;line-height:1.1;margin:15px 0 10px;} .headline .gradient{display:inline;} .intro{font-size:12px;line-height:1.75;} .tags,.actions,.footnote{display:none;} .phone-stage{width:100%;min-height:0;padding:0;display:flex;justify-content:center;} .halo,.float-tag{display:none;} .device,.device:hover,.device.activated{transform:none;width:min(357px,calc(100vw - 27px));height:min(722px,calc(100svh - 230px));min-height:525px;} .mobile-caption{display:block;color:#7e88a7;font-size:10px;text-align:center;margin:17px auto 0;} }
+    @media (max-width:370px) { .site-header{padding-inline:13px;} .hero{padding-inline:7px;} .device,.device:hover,.device.activated{width:calc(100vw - 16px);} .screen-h1{font-size:26px;} .app-symbol{width:54px;height:54px;} .apps-grid{gap:12px 7px;} .home-view{padding-inline:17px;} }
+    @media (max-height:780px) and (min-width:761px) { .site-header{padding-top:18px;} .hero{min-height:660px;} .phone-stage{min-height:665px;} .device{transform:scale(.87) rotate(-1.9deg);} .device:hover,.device.activated{transform:scale(.87) rotate(0);} .float-tag.one{top:85px;} .float-tag.two{bottom:88px;} }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important;} }
+  </style>
+</head>
+<body>
+  <!-- Icons are embedded so the portfolio works without an icon library. -->
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m5 12 14 0m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 18-6-6 6-6"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4m-3-13-2 18"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h5a5 5 0 0 0 0-10h-2a4 4 0 0 1 0-8h5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 24 24"><path d="M9 19c-4 1-4-2-6-2m12 4v-3.1c0-1 .2-1.5.5-2-3.6-.4-7.5-1.7-7.5-8A6.2 6.2 0 0 1 9.6 3 5.8 5.8 0 0 1 9.8.6s1.8-.1 3.7 1.7A12 12 0 0 1 17 2.3C19 0.6 20.8.6 20.8.6A5.7 5.7 0 0 1 21 3a6.2 6.2 0 0 1 1.6 4.3c0 6.3-3.9 7.6-7.5 8 .4.5.6 1.2.6 2.4V21" transform="translate(0 1) scale(.91)"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-stars" viewBox="0 0 24 24"><path d="m12 3 2.1 6.9L21 12l-6.9 2.1L12 21l-2.1-6.9L3 12l6.9-2.1L12 3ZM19 2l.7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 7h16l-1 14H5L4 7Zm4 0V5a4 4 0 0 1 8 0v2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-10-1v14c4-1 7-1 10 1 3-2 6-2 10-1V5c-4-1-7-1-10 1Zm0 0v14"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3m6 0h6"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M6 13a9 9 0 0 1 12 0m-9 4a4 4 0 0 1 6 0m-3 3h.01"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><path d="M3 20v-4m6 4v-8m6 8V8m6 12V4"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 26 16"><rect x="1" y="2" width="21" height="12" rx="3"/><path d="M24 6v4"/><rect x="4" y="5" width="13" height="6" rx="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+  </svg>
+
+  <div class="page">
+    <div class="ambient a"></div><div class="ambient b"></div>
+    <header class="site-header">
+      <a class="identity" href="#home" aria-label="Về màn hình Home" data-open="home"><span class="logo-mark"><span>NT.</span></span> NGUYEN TRAN</a>
+      <div class="header-right"><span class="edition">Interactive portfolio / 2026</span><a class="header-link" href="https://github.com/NguynNe3110" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-gh"/></svg> GitHub <svg class="icon"><use href="#i-arrow"/></svg></a></div>
+    </header>
+    <main class="hero">
+      <section class="copy-area" aria-label="Giới thiệu">
+        <div class="eyebrow"><span class="live-dot"></span> OPEN TO INTERNSHIP</div>
+        <h1 class="headline">Hi, I'm Nguyên.<span class="gradient">I build mobile<br />experiences.</span></h1>
+        <p class="intro">Mình là <strong>Nguyên Trần</strong>, một Mobile Developer yêu thích việc biến ý tưởng thành ứng dụng thực tế. Khám phá hành trình, kỹ năng và những dự án của mình — <strong>ngay trên chiếc điện thoại này.</strong></p>
+        <div class="tags"><span class="tag">Kotlin · Android</span><span class="tag">Flutter</span><span class="tag">React Native</span><span class="tag">Clean Architecture</span></div>
+        <div class="actions"><button class="primary-btn" type="button" data-open="projects">Explore my work <svg class="icon"><use href="#i-right"/></svg></button><button class="text-btn" type="button" data-open="about">About me <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        <div class="footnote"><span class="rule"></span> A portfolio made to be explored, not just scrolled.</div>
+      </section>
+      <section class="phone-stage" aria-label="Điện thoại portfolio có thể tương tác">
+        <div class="halo"></div>
+        <div class="float-tag one"><svg class="icon"><use href="#i-stars"/></svg> More than a website</div>
+        <div class="float-tag two"><svg class="icon"><use href="#i-smartphone"/></svg> Tap to explore <svg class="icon"><use href="#i-right"/></svg></div>
+        <div class="device" id="device">
+          <div class="screen">
+            <div class="status"><span id="clock">9:41</span><span class="status-center" aria-hidden="true"></span><span class="status-right"><svg class="icon"><use href="#i-signal"/></svg><svg class="icon"><use href="#i-wifi"/></svg><svg class="icon battery"><use href="#i-battery"/></svg></span></div>
+            <div class="views">
+              <section class="view home-view active" id="view-home" aria-label="Màn hình chính">
+                <div class="home-head"><div><div class="home-label-date" id="today">Sunday, October 11</div><h2 class="home-hello">Hello, world! <span aria-hidden="true">✳</span></h2></div><div class="avatar-mini">NT</div></div>
+                <button class="feature-card" type="button" data-open="about"><span class="feature-title">WELCOME TO MY SPACE</span><span class="feature-heading">Code. Create.<br/>Keep growing.</span><span class="feature-sub">Mobile development is where creativity meets problem-solving.</span><span class="feature-bottom">Get to know me <svg class="icon"><use href="#i-right"/></svg></span></button>
+                <div class="home-section-title"><strong>My little universe</strong><span>6 apps</span></div>
+                <div class="apps-grid">
+                  <button class="app-tile" data-open="about" type="button"><span class="app-symbol app-purple"><svg class="icon"><use href="#i-user"/></svg></span><span>About</span></button>
+                  <button class="app-tile" data-open="skills" type="button"><span class="app-symbol app-blue"><svg class="icon"><use href="#i-code"/></svg></span><span>Skills</span></button>
+                  <button class="app-tile" data-open="projects" type="button"><span class="app-symbol app-pink"><svg class="icon"><use href="#i-grid"/></svg></span><span>Projects</span></button>
+                  <button class="app-tile" data-open="journey" type="button"><span class="app-symbol app-orange"><svg class="icon"><use href="#i-route"/></svg></span><span>Journey</span></button>
+                  <button class="app-tile" data-open="github" type="button"><span class="app-symbol app-dark"><svg class="icon"><use href="#i-gh"/></svg></span><span>GitHub</span></button>
+                  <button class="app-tile" data-open="contact" type="button"><span class="app-symbol app-green"><svg class="icon"><use href="#i-mail"/></svg></span><span>Contact</span></button>
+                </div>
+                <div class="mini-hint">Choose an app to learn more ✨</div>
+                <div class="dock"><button type="button" data-open="github" aria-label="Mở GitHub"><svg class="icon"><use href="#i-gh"/></svg></button><button type="button" data-open="projects" aria-label="Mở Projects"><svg class="icon"><use href="#i-grid"/></svg></button><button type="button" data-open="contact" aria-label="Mở Contact"><svg class="icon"><use href="#i-mail"/></svg></button></div>
+              </section>
+
+              <section class="view" id="view-about" aria-label="Thông tin giới thiệu">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">About me</span><span class="app-header-right">01 / 06</span></div>
+                <p class="screen-eyebrow">A SMALL INTRODUCTION</p><h2 class="screen-h1">More than<br/>just code.</h2><p class="screen-lead">Một chút về con người đứng sau những dòng code.</p>
+                <div class="profile-box"><div class="profile-avatar">NT.</div><div><h2>Nguyên Trần</h2><p>Mobile Developer</p><span class="available"><span class="live-dot"></span> Looking for internship</span></div></div>
+                <p class="copy-text">Xin chào! Mình là Nguyên — một sinh viên ngành Công nghệ thông tin, tập trung vào phát triển ứng dụng di động.</p>
+                <p class="copy-text">Mình thích xây dựng ứng dụng có giao diện chỉn chu, logic rõ ràng và kiến trúc dễ bảo trì. Với mình, một sản phẩm tốt không chỉ chạy được, mà còn phải mang lại trải nghiệm tốt cho người dùng.</p>
+                <h3 class="subhead">A few quick facts</h3><div class="info-rows"><div class="info-cell"><small>My field</small><strong>Mobile Development</strong></div><div class="info-cell"><small>Currently</small><strong>IT Student</strong></div><div class="info-cell"><small>I care about</small><strong>Clean Architecture</strong></div><div class="info-cell"><small>My next step</small><strong>Internship</strong></div></div>
+                <h3 class="subhead">Let's connect</h3><button type="button" class="external-block" data-open="contact">Say hello <svg class="icon"><use href="#i-right"/></svg></button>
+              </section>
+
+              <section class="view" id="view-skills" aria-label="Kỹ năng và công nghệ">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">Tech stack</span><span class="app-header-right">02 / 06</span></div>
+                <p class="screen-eyebrow">MY TOOLKIT</p><h2 class="screen-h1">Tools I use<br/>to build things.</h2><p class="screen-lead">Những ngôn ngữ, công nghệ và công cụ mình đã học và sử dụng trong các dự án.</p>
+                <div class="skill-group"><div class="skill-group-head"><span><svg class="icon"><use href="#i-smartphone"/></svg></span><strong>Mobile Development</strong></div><div class="skill-chips"><span class="skill-chip">Kotlin</span><span class="skill-chip">Android</span><span class="skill-chip">Java</span><span class="skill-chip">Flutter</span><span class="skill-chip">Dart</span><span class="skill-chip">React Native</span></div></div>
+                <div class="skill-group"><div class="skill-group-head"><span><svg class="icon"><use href="#i-layers"/></svg></span><strong>Architecture & Patterns</strong></div><div class="skill-chips"><span class="skill-chip">MVVM</span><span class="skill-chip">Clean Architecture</span><span class="skill-chip">BLoC</span><span class="skill-chip">Repository</span><span class="skill-chip">State Management</span></div></div>
+                <div class="skill-group"><div class="skill-group-head"><span><svg class="icon"><use href="#i-terminal"/></svg></span><strong>Data & Backend Services</strong></div><div class="skill-chips"><span class="skill-chip">PostgreSQL</span><span class="skill-chip">MySQL</span><span class="skill-chip">Firebase</span><span class="skill-chip">Supabase</span><span class="skill-chip">REST API</span></div></div>
+                <div class="skill-group"><div class="skill-group-head"><span><svg class="icon"><use href="#i-code"/></svg></span><strong>Developer Tools</strong></div><div class="skill-chips"><span class="skill-chip">Git</span><span class="skill-chip">GitHub</span><span class="skill-chip">GitHub Actions</span><span class="skill-chip">Docker</span><span class="skill-chip">Postman</span><span class="skill-chip">Android Studio</span><span class="skill-chip">VS Code</span></div></div>
+              </section>
+
+              <section class="view" id="view-projects" aria-label="Dự án">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">My projects</span><span class="app-header-right">03 / 06</span></div>
+                <p class="screen-eyebrow">SELECTED WORK</p><h2 class="screen-h1">Made with<br/>curiosity.</h2><p class="screen-lead">Một vài dự án mình đã xây dựng và ý tưởng đang phát triển.</p>
+                <article class="project-card"><div class="project-art p1"><svg class="icon"><use href="#i-bag"/></svg><span class="art-bubble"></span></div><div class="project-details"><div class="project-meta"><span class="project-index">PROJECT 01</span><span class="project-state">App project</span></div><h3>Fashion Shopping App</h3><p>Ứng dụng mua sắm thời trang với danh sách sản phẩm, giỏ hàng, địa chỉ nhận hàng và tích hợp Supabase.</p><div class="project-tech"><span>Flutter</span><span>BLoC</span><span>Supabase</span></div></div></article>
+                <article class="project-card"><div class="project-art p2"><svg class="icon"><use href="#i-book"/></svg><span class="art-bubble"></span></div><div class="project-details"><div class="project-meta"><span class="project-index">PROJECT 02</span><span class="project-state">UI practice</span></div><h3>Language Learning UI</h3><p>Thực hành thiết kế trải nghiệm học ngoại ngữ: lộ trình bài học, hiệu ứng tương tác và màn hình luyện tập.</p><div class="project-tech"><span>Flutter</span><span>UI/UX</span><span>Animations</span></div></div></article>
+                <article class="project-card"><div class="project-art p3"><svg class="icon"><use href="#i-layers"/></svg><span class="art-bubble"></span></div><div class="project-details"><div class="project-meta"><span class="project-index">PROJECT 03</span><span class="project-state">Concept · Planning</span></div><h3>University Management</h3><p>Ý tưởng hệ thống quản lý đại học, hướng tới các chức năng học vụ, quản lý vai trò và điểm danh.</p><div class="project-tech"><span>System Design</span><span>BA / UML</span></div></div></article>
+                <a class="external-block" href="https://github.com/NguynNe3110?tab=repositories" target="_blank" rel="noopener noreferrer">Explore all repositories <svg class="icon"><use href="#i-arrow"/></svg></a>
+              </section>
+
+              <section class="view" id="view-journey" aria-label="Hành trình học tập">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">My journey</span><span class="app-header-right">04 / 06</span></div>
+                <p class="screen-eyebrow">LEARNING IN PUBLIC</p><h2 class="screen-h1">Always a<br/>work in progress.</h2><p class="screen-lead">Một hành trình học hỏi, thử nghiệm và không ngừng hoàn thiện bản thân.</p>
+                <div class="timeline"><article class="timeline-item"><span class="phase">Foundation</span><h3>Starting with Android</h3><p>Tiếp cận Java, Kotlin, Android SDK và cách xây dựng ứng dụng từ giao diện đến xử lý dữ liệu.</p></article><article class="timeline-item"><span class="phase">Going deeper</span><h3>Thinking in architecture</h3><p>Rèn luyện cách chia lớp Data / Domain / Presentation, quản lý state và tổ chức code dễ mở rộng.</p></article><article class="timeline-item"><span class="phase">Exploration</span><h3>Cross-platform development</h3><p>Trải nghiệm Flutter và tìm hiểu React Native để mở rộng góc nhìn về mobile development.</p></article><article class="timeline-item"><span class="phase">What's next?</span><h3>Looking for an internship</h3><p>Mong muốn làm việc trong môi trường thực tế, học từ đội ngũ giàu kinh nghiệm và đóng góp vào sản phẩm.</p></article></div>
+                <button type="button" class="external-block" data-open="skills">See the tools I've learned <svg class="icon"><use href="#i-right"/></svg></button>
+              </section>
+
+              <section class="view" id="view-github" aria-label="Thông tin GitHub">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">GitHub</span><span class="app-header-right">05 / 06</span></div>
+                <p class="screen-eyebrow">MY DIGITAL WORKSPACE</p><h2 class="screen-h1">Code lives<br/>here.</h2><p class="screen-lead">Kho lưu trữ và những dự án đang có trên GitHub của mình.</p>
+                <div class="github-hero"><div class="gh-avatar" id="gh-avatar"><svg class="icon"><use href="#i-gh"/></svg></div><div><h3 id="gh-name">Nguyên Trần</h3><p>@NguynNe3110</p></div></div>
+                <div class="gh-stats"><div class="gh-stat"><strong id="gh-repos">—</strong><span>Public repos</span></div><div class="gh-stat"><strong id="gh-followers">—</strong><span>Followers</span></div><div class="gh-stat"><strong id="gh-following">—</strong><span>Following</span></div></div>
+                <h3 class="subhead">Recent repositories</h3><div id="repo-list" aria-live="polite"><div class="empty-state">Đang tải dữ liệu GitHub...</div></div>
+                <a class="external-block" style="margin-top:14px" href="https://github.com/NguynNe3110" target="_blank" rel="noopener noreferrer">Open GitHub profile <svg class="icon"><use href="#i-arrow"/></svg></a>
+              </section>
+
+              <section class="view" id="view-contact" aria-label="Liên hệ">
+                <div class="app-header"><button type="button" class="back-circle" data-back aria-label="Quay lại"><svg class="icon"><use href="#i-left"/></svg></button><span class="app-header-title">Contact</span><span class="app-header-right">06 / 06</span></div>
+                <p class="screen-eyebrow">LET'S CONNECT</p><h2 class="screen-h1">Have an idea?<br/>Let's talk.</h2><p class="screen-lead">Mình luôn sẵn lòng kết nối, học hỏi và trao đổi về cơ hội thực tập hoặc dự án mới.</p>
+                <div class="contact-banner"><svg class="icon"><use href="#i-mail"/></svg></div>
+                <div class="contact-links">
+                  <a class="contact-link" href="https://github.com/NguynNe3110" target="_blank" rel="noopener noreferrer"><span class="contact-icon"><svg class="icon"><use href="#i-gh"/></svg></span><span><span class="contact-name">GitHub</span><span class="contact-sub">github.com/NguynNe3110</span></span><svg class="icon trailing"><use href="#i-arrow"/></svg></a>
+                  <button type="button" class="contact-link" id="copy-profile"><span class="contact-icon"><svg class="icon"><use href="#i-copy"/></svg></span><span><span class="contact-name">Copy profile link</span><span class="contact-sub">Sao chép đường dẫn GitHub</span></span><svg class="icon trailing"><use href="#i-right"/></svg></button>
+                  <a class="contact-link" id="email-link" href="#" hidden><span class="contact-icon"><svg class="icon"><use href="#i-mail"/></svg></span><span><span class="contact-name">Email me</span><span class="contact-sub" id="email-text"></span></span><svg class="icon trailing"><use href="#i-arrow"/></svg></a>
+                  <a class="contact-link" id="linkedin-link" href="#" hidden target="_blank" rel="noopener noreferrer"><span class="contact-icon"><svg class="icon"><use href="#i-user"/></svg></span><span><span class="contact-name">LinkedIn</span><span class="contact-sub">View my professional profile</span></span><svg class="icon trailing"><use href="#i-arrow"/></svg></a>
+                </div>
+                <p class="contact-note" id="contact-note">Email và LinkedIn chưa được cung cấp. Bạn có thể bổ sung chúng trong phần CONFIG ở cuối file HTML.</p>
+              </section>
+            </div>
+            <div class="system-navigation"><button class="sys-back" id="system-back" aria-label="Quay lại" disabled><svg class="icon"><use href="#i-left"/></svg></button><button class="home-gesture" id="system-home" type="button" aria-label="Về màn hình Home" title="Home"></button></div>
+            <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+      <p class="mobile-caption">↗ Chạm vào một icon để khám phá</p>
+    </main>
+  </div>
+  <script>
+    'use strict';
+    // ============================================
+    // CUSTOMIZE HERE — thêm thông tin của bạn.
+    // Đừng đưa secret / API key vào file HTML.
+    // ============================================
+    const CONFIG = {
+      githubUsername: 'NguynNe3110',
+      email: '',     // Example: 'yourname@gmail.com'
+      linkedin: ''   // Example: 'https://www.linkedin.com/in/your-profile/'
+    };
+
+    const validViews = new Set(['home', 'about', 'skills', 'projects', 'journey', 'github', 'contact']);
+    const screens = [...document.querySelectorAll('.view')];
+    const device = document.getElementById('device');
+    const systemBack = document.getElementById('system-back');
+    const toast = document.getElementById('toast');
+    const historyStack = [];
+    let activeView = 'home';
+    let githubLoaded = false;
+    let toastTimeout;
+
+    function showView(name, record = true) {
+      if (!validViews.has(name) || (name === activeView && record)) return;
+      if (record && activeView !== name) historyStack.push(activeView);
+      activeView = name;
+      screens.forEach(screen => {
+        const chosen = screen.id === 'view-' + name;
+        screen.classList.toggle('active', chosen);
+        screen.setAttribute('aria-hidden', String(!chosen));
+        if (chosen) screen.scrollTop = 0;
+      });
+      systemBack.disabled = name === 'home';
+      device.classList.add('activated');
+      if (name === 'github') loadGitHub();
+    }
+    function goBack() {
+      if (activeView === 'home') return;
+      const previous = historyStack.pop() || 'home';
+      showView(previous, false);
+    }
+    function goHome() {
+      historyStack.length = 0;
+      showView('home', false);
+    }
+    document.querySelectorAll('[data-open]').forEach(el => {
+      el.addEventListener('click', event => {
+        if (el.tagName === 'A') event.preventDefault();
+        showView(el.dataset.open);
+      });
+    });
+    document.querySelectorAll('[data-back]').forEach(el => el.addEventListener('click', goBack));
+    systemBack.addEventListener('click', goBack);
+    document.getElementById('system-home').addEventListener('click', goHome);
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && activeView !== 'home') { event.preventDefault(); goBack(); }
+    });
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: false });
+      document.getElementById('today').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+    updateClock();
+    setInterval(updateClock, 60 * 1000);
+
+    function showToast(message) {
+      clearTimeout(toastTimeout);
+      toast.textContent = message;
+      toast.classList.add('show');
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    document.getElementById('copy-profile').addEventListener('click', async () => {
+      const link = 'https://github.com/' + CONFIG.githubUsername;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(link);
+        } else {
+          const field = document.createElement('textarea');
+          field.value = link;
+          field.style.cssText = 'position:fixed;left:-9999px;top:0';
+          document.body.appendChild(field);
+          field.select();
+          if (!document.execCommand('copy')) throw new Error('Copy unsupported');
+          field.remove();
+        }
+        showToast('Đã sao chép link GitHub ✓');
+      } catch (_) {
+        showToast('Không thể sao chép — hãy mở GitHub.');
+      }
+    });
+
+    if (CONFIG.email) {
+      const emailLink = document.getElementById('email-link');
+      emailLink.href = 'mailto:' + encodeURIComponent(CONFIG.email);
+      document.getElementById('email-text').textContent = CONFIG.email;
+      emailLink.hidden = false;
+    }
+    if (CONFIG.linkedin && /^https:\/\//i.test(CONFIG.linkedin)) {
+      const linkedinLink = document.getElementById('linkedin-link');
+      linkedinLink.href = CONFIG.linkedin;
+      linkedinLink.hidden = false;
+    }
+    if (CONFIG.email || CONFIG.linkedin) document.getElementById('contact-note').hidden = true;
+
+    // Data is fetched from the public GitHub API only when the GitHub screen is opened.
+    // All remote content is rendered with textContent (never innerHTML).
+    async function loadGitHub() {
+      if (githubLoaded) return;
+      githubLoaded = true;
+      const username = encodeURIComponent(CONFIG.githubUsername);
+      const reposContainer = document.getElementById('repo-list');
+      try {
+        const [userResponse, repoResponse] = await Promise.all([
+          fetch('https://api.github.com/users/' + username, { headers: { Accept: 'application/vnd.github+json' } }),
+          fetch('https://api.github.com/users/' + username + '/repos?sort=updated&per_page=6&type=owner', { headers: { Accept: 'application/vnd.github+json' } })
+        ]);
+        if (!userResponse.ok || !repoResponse.ok) throw new Error('GitHub API temporarily unavailable');
+        const [user, repos] = await Promise.all([userResponse.json(), repoResponse.json()]);
+        document.getElementById('gh-name').textContent = user.name || CONFIG.githubUsername;
+        document.getElementById('gh-repos').textContent = Number.isFinite(user.public_repos) ? user.public_repos : '—';
+        document.getElementById('gh-followers').textContent = Number.isFinite(user.followers) ? user.followers : '—';
+        document.getElementById('gh-following').textContent = Number.isFinite(user.following) ? user.following : '—';
+        if (user.avatar_url && /^https:\/\//.test(user.avatar_url)) {
+          const img = document.createElement('img');
+          img.src = user.avatar_url;
+          img.alt = 'GitHub avatar';
+          img.loading = 'lazy';
+          document.getElementById('gh-avatar').replaceChildren(img);
+        }
+        reposContainer.replaceChildren();
+        if (!Array.isArray(repos) || repos.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-state';
+          empty.textContent = 'Chưa có public repositories để hiển thị.';
+          reposContainer.appendChild(empty);
+          return;
+        }
+        repos.filter(repo => !repo.fork).slice(0, 4).forEach(repo => {
+          const anchor = document.createElement('a');
+          anchor.className = 'repo-item';
+          anchor.href = repo.html_url && repo.html_url.startsWith('https://github.com/') ? repo.html_url : 'https://github.com/' + CONFIG.githubUsername;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener noreferrer';
+          const heading = document.createElement('strong');
+          heading.textContent = repo.name || 'Untitled repository';
+          const desc = document.createElement('p');
+          desc.textContent = repo.description || 'View source code and project details on GitHub.';
+          const meta = document.createElement('div');
+          meta.className = 'repo-meta';
+          const language = document.createElement('span');
+          language.textContent = repo.language || 'Repository';
+          const stars = document.createElement('span');
+          stars.textContent = '☆ ' + (repo.stargazers_count || 0);
+          meta.append(language, stars);
+          anchor.append(heading, desc, meta);
+          reposContainer.appendChild(anchor);
+        });
+        if (!reposContainer.children.length) {
+          reposContainer.textContent = 'Chưa có repositories riêng để hiển thị.';
+        }
+      } catch (error) {
+        githubLoaded = false; // retry next time
+        reposContainer.replaceChildren();
+        const message = document.createElement('div');
+        message.className = 'empty-state';
+        message.textContent = 'Không tải được dữ liệu lúc này (cần internet hoặc GitHub API đang giới hạn). Bạn vẫn có thể mở GitHub bằng nút bên dưới.';
+        reposContainer.appendChild(message);
+      }
+    }
+  </script>
+</body>
+</html>
